@@ -4,6 +4,7 @@ from  werkzeug.utils  import  secure_filename
 from  flask  import  send_from_directory
 import requests
 import json
+from src.load import subir_dados
 
 UPLOAD_FOLDER  =  './data' 
 ALLOWED_EXTENSIONS = {'json'}
@@ -48,8 +49,10 @@ def upload_file():
                 for i , transacao in enumerate(dados['transacoes']):
                     if 'descricao' not in transacao or 'valor' not in transacao:
                         return jsonify({'error': f'Erro na transação {i}: falta descricao ou valor'}), 400
-                    
-                return jsonify({'message': 'Upload realizado e dados validados com sucesso!'}), 201
+                
+                subir_dados('_dbteste' , path)
+
+                return jsonify({'message' : 'Upload realizado e dados validados com sucesso!'}), 201
             
         except json.JSONDecodeError:
             return jsonify({'error': 'Arquivo JSON inválido ou corrompido'}), 400
