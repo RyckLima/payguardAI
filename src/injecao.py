@@ -39,7 +39,7 @@ def upload_file():
 
                 dados = json.load(f)
 
-                campos_obrigatorios = ['user_id' , 'transacoes']
+                campos_obrigatorios = ['user_id' , 'transacoes' , 'salario_bruto' , 'dia_pagamento']  
 
                 for campo in campos_obrigatorios:
                     if campo not in dados:
@@ -55,10 +55,6 @@ def upload_file():
             return jsonify({'error': 'Arquivo JSON inválido ou corrompido'}), 400
         except Exception as e:
             return jsonify({'error': f'Erro interno: {str(e)}'}), 500
-
-
-
-            
                              
 if __name__ == '__main__':
     app.run(debug=True)
