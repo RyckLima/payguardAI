@@ -19,7 +19,7 @@ class PGDataSet(Dataset):
         conn.close()
 
     def __len__(self):
-        pass
+        return len(self.data)
 
     def __getitem__(self, key):
         pass
